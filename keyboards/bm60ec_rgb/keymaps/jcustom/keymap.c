@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [1] = LAYOUT(
         _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_GRV, _______,
-        TG(5),     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______, KC_BSLASH,
+        TG(5),     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_F14, KC_F15, KC_F16, KC_BSLASH,
         _______,     M_JQUERY, M_DIV, M_DIVEND, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,            _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LCTL(KC_Z), LCTL(KC_Y), C(KC_BSPC),        KC_HOME, TO(0),
         _______,   _______,   _______,                      KC_UNDS,                              _______, _______, TG(3), KC_END, TG(4)
