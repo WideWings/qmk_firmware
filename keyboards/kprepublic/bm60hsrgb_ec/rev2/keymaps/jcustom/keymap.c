@@ -25,6 +25,7 @@ enum{
 	M_JSLOG,
 	M_EMAIL_W,
 	M_PW_W,
+    SPAM2,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[3] = LAYOUT(
         _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, LCTL(KC_Y), LCTL(KC_Z),
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______,     _______, _______, _______, SPAM2, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,        _______, _______,
         _______,   _______,   _______,                      _______,                              _______, _______, _______, _______, _______
     ),
@@ -89,6 +90,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool stop_screensaver = false;     //screensaver mode status
 uint32_t last_activity_timer = 0;
 
+bool is_clicking = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record){
 	if (record->event.pressed) {
 		switch(keycode){
@@ -121,8 +124,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
                 }
                 last_activity_timer = timer_read32();  //reset timer
                 return false; break;
+            case SPAM2:
+                is_clicking = true;
+                register_code(KC_MS_BTN1);
+                break;
 		}
-	}
+	} else {
+        is_clicking = false;
+        unregister_code(KC_MS_BTN1);
+    }
 	return true;
 };
 
@@ -132,6 +142,13 @@ void matrix_scan_user(void) {
             tap_code16(KC_F13);                                         //  tap F13
             last_activity_timer = timer_read32();                       //  reset last_activity_timer
         }
+    }
+
+    if (is_clicking) {
+        wait_ms(50);
+        unregister_code(KC_MS_BTN1);
+        wait_ms(50);
+        register_code(KC_MS_BTN1);
     }
 }
 
