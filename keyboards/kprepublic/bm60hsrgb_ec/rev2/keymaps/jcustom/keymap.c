@@ -14,15 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#define SCREENSAVE_DELAY 120000  //configure how long to wait after last activity. 120000ms = 2 mins
 
 enum{
 	M_JQUERY = SAFE_RANGE,
+    NO_SLEEP,
 	M_DIV,
 	M_DIVEND,
 	M_VDUMP,
 	M_JSLOG,
 	M_EMAIL_W,
 	M_PW_W,
+    SPAM2,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,13 +38,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [1] = LAYOUT(
         _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_GRV, _______, KC_VOLU, KC_VOLD,
-        TG(5),     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______, KC_BSLASH,
+        TG(5),     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_F14, KC_F15, KC_F16, KC_BSLASH,
         _______,     M_JQUERY, M_DIV, M_DIVEND, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,            _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LCTL(KC_Z), LCTL(KC_Y), C(KC_BSPC),        KC_HOME, TO(0),
         _______,   _______,   _______,                      KC_UNDS,                              _______, _______, TG(3), KC_END, TG(4)
     ),
 	[2] = LAYOUT(
-        RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_TILDE, LALT(KC_F4), KC_VOLU, KC_VOLD,
+        RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, NO_SLEEP, KC_TILDE, LALT(KC_F4), KC_VOLU, KC_VOLD,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SLCK, KC_BRK, KC_INS, KC_PIPE,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,            M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), C(KC_T),        KC_PGUP, _______,
@@ -55,11 +58,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,   _______,   _______,                      _______,                              _______, _______, _______, _______, _______
     ),
 	[4] = LAYOUT(
-        _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, LSFT(LWIN(KC_Z)), LWIN(KC_Z),
+        _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, S(KC_F5), LCTL(KC_Y), LCTL(KC_Z),
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,        _______, MO(7),
-        _______,   KC_LALT,   KC_LGUI,                      _______,                              _______, MO(6), _______, _______, _______
+        _______,   _______,   _______,                    _______,                              _______, MO(6), _______, _______, _______
     ),
     [5] = LAYOUT(
         TG(5),   KC_NLCK, KC_PSLS, KC_PAST, KC_BSPC, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -69,20 +72,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,   _______,   KC_P0,                      KC_PENT,                              _______, _______, _______, _______, _______
     ),
     [6] = LAYOUT(
-        _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_GRV, _______, _______, _______,
+        _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_GRV, KC_MUTE, KC_VOLU, KC_VOLD,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSLASH,
         _______,     M_JQUERY, M_DIV, M_DIVEND, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______,            _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LWIN(KC_Z), LSFT(LWIN(KC_Z)), _______,        _______, TO(0),
-        _______,   _______,   _______,                      KC_UNDS,                              _______, _______, _______, _______, TO(0)
+        _______,            _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LCTL(KC_Z), LCTL(KC_Y), C(KC_BSPC),        KC_HOME, TO(0),
+        _______,   _______,   _______,                      KC_UNDS,                              _______, _______, TG(3), KC_END, TG(4)
     ),
     [7] = LAYOUT(
-        _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, LGUI(KC_Q), _______, _______,
+        _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, NO_SLEEP, KC_TILDE, LGUI(KC_Q), _______, _______,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PIPE,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______,            M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), LGUI(KC_T),        KC_PGUP, _______,
-        _______,   _______,   _______,                      _______,                              _______, LGUI(A(KC_ESC)), LGUI(S(KC_T)), KC_PGDOWN, LGUI(KC_W)
+        _______,            M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), C(KC_T),        KC_PGUP, _______,
+        _______,   _______,   _______,                      _______,                              G(KC_E), C(A(KC_DEL)), C(S(KC_T)), KC_PGDOWN, C(KC_W)
     ),
 };
+
+bool stop_screensaver = false;     //screensaver mode status
+uint32_t last_activity_timer = 0;
+
+bool is_clicking = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record){
 	if (record->event.pressed) {
@@ -108,10 +116,41 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
 			case M_PW_W:
 				SEND_STRING("");	//DO NOT COMMIT THESE LINES !!!
 				return false; break;
+            case NO_SLEEP:             //if NO_SLEEP is pressed
+                if(stop_screensaver){
+                    stop_screensaver = false;               //turn off screensaver mode
+                }else{
+                    stop_screensaver = true;               //turn on screensaver mode
+                }
+                last_activity_timer = timer_read32();  //reset timer
+                return false; break;
+            case SPAM2:
+                is_clicking = true;
+                register_code(KC_MS_BTN1);
+                break;
 		}
-	}
+	} else {
+        is_clicking = false;
+        unregister_code(KC_MS_BTN1);
+    }
 	return true;
 };
+
+void matrix_scan_user(void) {
+    if (stop_screensaver) {                                             //if screensaver mode is active
+        if (timer_elapsed32(last_activity_timer) > SCREENSAVE_DELAY) {  //and no key has been pressed in more than SCREENSAVE_DELAY ms
+            tap_code16(KC_F13);                                         //  tap F13
+            last_activity_timer = timer_read32();                       //  reset last_activity_timer
+        }
+    }
+
+    if (is_clicking) {
+        wait_ms(50);
+        unregister_code(KC_MS_BTN1);
+        wait_ms(50);
+        register_code(KC_MS_BTN1);
+    }
+}
 
 bool encoder_update_kb(uint8_t index, bool clockwise) {
     return encoder_update_user(index, clockwise);
@@ -129,9 +168,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 			break;
 		case 4:
 			if (clockwise) {
-				tap_code16(LSFT(LWIN(KC_Z)));
+				tap_code16(LCTL(KC_Y));
 			} else {
-				tap_code16(LWIN(KC_Z));
+				tap_code16(LCTL(KC_Z));
 			}
 			return true;
 			break;
@@ -160,6 +199,10 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // RGB_MATRIX_INDICATOR_SET_COLOR(13, 0, 0, 0);
     // RGB_MATRIX_INDICATOR_SET_COLOR(14, 0, 0, 0);
     // RGB_MATRIX_INDICATOR_SET_COLOR(27, 0, 0, 0);
+
+    if(stop_screensaver){
+        RGB_MATRIX_INDICATOR_SET_COLOR(12, 0, 0, 255);              // = for no sleep indicator
+    }
 
 	if (host_keyboard_led_state().caps_lock) {
 		RGB_MATRIX_INDICATOR_SET_COLOR(28, 255, 255, 255);          //	caps_lock
@@ -216,7 +259,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 			RGB_MATRIX_INDICATOR_SET_COLOR(13, 255, 255, 255);	        //	backspace / `~
 			break;
 		case 4:																						//	layer 4 indicators
-			RGB_MATRIX_INDICATOR_SET_COLOR(13, 127, 255, 212);	        //	backspace / `~
+			RGB_MATRIX_INDICATOR_SET_COLOR(13, 255, 255, 255);	        //	backspace / `~
 			break;
         case 5:																						//	layer 5 indicators
             if (host_keyboard_led_state().num_lock) {

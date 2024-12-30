@@ -24,6 +24,8 @@ enum{
 	M_JSLOG,
 	M_EMAIL_W,
 	M_PW_W,
+    SINGLE_SOL,
+    DOUBLE_SOL,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,17 +37,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,   KC_LGUI,   KC_LALT,              KC_SPC, MO(1), KC_SPC,                       KC_SLSH, MO(1),   KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [1] = LAYOUT_60_b_iso(
-        _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______,
-        _______,     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______,
+        _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_GRV, _______,
+        _______,     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_F14, KC_F15, KC_F16,
         _______,     M_JQUERY, M_DIV, M_DIVEND, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSLASH, _______,
-        _______, BL_TOGG,  _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LCTL(KC_Z), LCTL(KC_Y), _______,        KC_VOLU, TO(0),
+        _______, SINGLE_SOL,  _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LCTL(KC_Z), LCTL(KC_Y), _______,        KC_VOLU, TO(0),
         _______,   _______,   _______,              KC_UNDS, _______, C(KC_BSPC),                       _______, _______, _______, KC_VOLD, TO(3)
     ),
 	[2] = LAYOUT_60_b_iso(
-        RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, LALT(KC_F4),
+        RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_TILD, LALT(KC_F4),
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RSFT(KC_BSLASH), _______,
-        _______, _______,  M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), C(KC_T),        KC_PGUP, _______,
+        _______, DOUBLE_SOL,  M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), C(KC_T),        KC_PGUP, _______,
         _______,   _______,   _______,              _______, _______, _______,                       _______, C(A(KC_DEL)), C(S(KC_T)), KC_PGDOWN, C(KC_W)
     ),
 	[3] = LAYOUT_60_b_iso(
@@ -59,23 +61,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______,
         _______,     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______,
         _______,     M_JQUERY, M_DIV, M_DIVEND, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSLASH, _______,
-        _______, BL_TOGG,  _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LWIN(KC_Z), LSFT(LWIN(KC_Z)), _______,        _______, _______,
+        _______, SINGLE_SOL,  _______, _______, M_JSLOG, M_VDUMP, _______, _______, _______, LWIN(KC_Z), LSFT(LWIN(KC_Z)), _______,        _______, _______,
         _______,   _______,   _______,              KC_UNDS, _______, A(KC_DEL),                       _______, _______, _______, _______, TO(0)
     ),
     [5] = LAYOUT_60_b_iso(
         _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, LGUI(KC_Q),
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RSFT(KC_BSLASH), _______,
-        _______, _______,  M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), LGUI(KC_T),        KC_PGUP, _______,
+        _______, DOUBLE_SOL,  M_EMAIL_W, M_PW_W, _______, _______, _______, _______, _______, A(KC_LEFT), A(KC_RIGHT), LGUI(KC_T),        KC_PGUP, _______,
         _______,   _______,   _______,              _______, _______, _______,                       _______, LGUI(A(KC_ESC)), LGUI(S(KC_T)), KC_PGDOWN, LGUI(KC_W)
     ),
 };
 
 static uint16_t key_timer;
-bool BL_flashing = true;
+bool keydown_sol = true;
+bool keydown_keyup_sol = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (BL_flashing && record->event.pressed) {
+    if ((keydown_sol || keydown_keyup_sol) && record->event.pressed) {
+        backlight_level_noeeprom(255);
+        key_timer = timer_read();
+    }else if(keydown_keyup_sol){
         backlight_level_noeeprom(255);
         key_timer = timer_read();
     }
@@ -83,7 +89,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case BL_TOGG:
             if (record->event.pressed)
-                BL_flashing = !BL_flashing;
+                keydown_sol = !keydown_sol;
             return false;
     }
 
@@ -113,6 +119,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			case M_PW_W:
 				SEND_STRING("");	//DO NOT COMMIT THESE LINES !!!
 				return false; break;
+            case SINGLE_SOL:
+                if(keydown_sol){
+                    keydown_sol = false;
+                }else{
+                    keydown_sol = true;
+                }
+                return false; break;
+            case DOUBLE_SOL:
+                if(keydown_keyup_sol){
+                    keydown_keyup_sol = false;
+                }else{
+                    keydown_keyup_sol = true;
+                }
+                return false; break;
 		}
 	}
     return true;
