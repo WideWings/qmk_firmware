@@ -38,23 +38,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [1] = LAYOUT_all(
         QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, NO_SLEEP, KC_GRV, KC_DEL,
-        KC_TAB,  KC_Q,    KC_UP,   KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_NUHS,
-        KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,
-        KC_LSFT, LALT(KC_F4), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, RGUI(KC_E),
+        KC_TAB,  KC_Q,    KC_UP,   KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, RGUI(KC_UP),
+        KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          RGUI(KC_DOWN),
+        KC_LSFT, LALT(KC_F4), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  RGUI(KC_LEFT), RGUI(KC_RGHT), RGUI(KC_E),
         _______, KC_LGUI, KC_LALT,                                     KC_UNDS,                    KC_RALT, KC_APP,  _______, _______
     ),
     [2] = LAYOUT_all(
         QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,  KC_BSPC, KC_DEL,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_F14,   KC_F15, KC_F16, KC_NUHS,
         KC_CAPS, M_JQUERY, M_DIV, M_DIVEND, KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,
-        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    M_JSLOG, M_VDUMP, KC_B,    KC_N,    KC_M,    LCTL(KC_Z), LCTL(KC_Y),  KC_SLSH, KC_VOLU, RCS(KC_ESC),
-        _______, KC_LGUI, KC_LALT,                                     KC_SPC,                    KC_RALT, _______,  KC_VOLD, _______
+        KC_LSFT, KC_HOME, KC_Z,    KC_X,    M_JSLOG, M_VDUMP, KC_B,    KC_N,    KC_M,    LCTL(KC_Z), LCTL(KC_Y),  KC_MUTE, KC_VOLU, KC_END,
+        _______, KC_LGUI, KC_LALT,                                     KC_UNDS,                    KC_RALT, _______,  KC_VOLD, _______
     ),
     [3] = LAYOUT_all(
         QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,  KC_TILDE, KC_DEL,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_UP, KC_INS, KC_RGHT,
         KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_LEFT, KC_DOWN,          KC_ENT,
-        KC_LSFT, KC_NUBS, M_EMAIL_W, M_PW_W,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, _______,
+        KC_LSFT, QK_BOOTLOADER, M_EMAIL_W, M_PW_W,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, _______,
         _______, KC_LGUI, KC_LALT,                                     KC_SPC,                    KC_RALT, C(S(KC_T)), C(KC_W), _______
     ),
 };
